@@ -130,9 +130,9 @@ routerCarrito.post('/:id/productos', (req,res) => {
    if(!found.producto){
 
 
-    found.producto=[]
-    found.producto = [...found.producto,req.body]
-    found.producto[found.producto.length-1].id = found.producto.length
+    found.productos=[]
+    found.productos = [...found.productos,req.body]
+    found.productos[found.productos.length-1].id = found.productos.length
 
        carrito.push(found)
 
@@ -144,8 +144,8 @@ routerCarrito.post('/:id/productos', (req,res) => {
     }else {
 
         
-      found.producto = [...found.producto,req.body]
-      found.producto[found.producto.length-1].id = found.producto.length
+      found.productos = [...found.productos,req.body]
+      found.productos[found.productos.length-1].id = found.productos.length
       carrito.push(found)
 
         fs.writeFileSync('carrito.json', JSON.stringify(carrito)) 
@@ -171,12 +171,13 @@ routerCarrito.post('/:id/productos', (req,res) => {
 
 routerCarrito.delete('/:id/:id_prod', (req,res) => {
     const id = parseInt(req.params.id)
-    const id_prod = parseInt(req.params.id)
+    const id_prod = parseInt(req.params.id_prod)
 
     let carritoRead =  fs.readFileSync('carrito.json')
     let carrito = JSON.parse(carritoRead)
 
     let foundCarrito = carrito.find(item => item.id === id)
+    carrito = carrito.filter(item => item.id !== id)
  
    if(!foundCarrito){
 
@@ -185,16 +186,16 @@ routerCarrito.delete('/:id/:id_prod', (req,res) => {
    }
 
 
-   carrito = carrito.filter(item => item.id === id)
      
    let filterProductoCarrito = foundCarrito.productos.filter(item => item.id !== id_prod)
 
-     carrito.push(filterProductoCarrito)
+   foundCarrito.productos = filterProductoCarrito
+  
+   carrito.push(foundCarrito)
 
-
-    fs.writeFileSync('productos.json', JSON.stringify(carrito)) 
+    fs.writeFileSync('carrito.json', JSON.stringify(carrito)) 
     
-
+  console.log(foundCarrito)
     res.json( carrito)
 } )
 
