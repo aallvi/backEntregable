@@ -1,7 +1,11 @@
 const express = require('express')
+require('dotenv').config()
 const fs = require('fs')
-const random = require('random')
 const app = express()
+const cors = require('cors');
+
+
+
 
 const routerProductos = express.Router()
 const routerCarrito = express.Router()
@@ -14,7 +18,10 @@ routerProductos.use(express.urlencoded({extended:true}))
 routerCarrito.use(express.json())
 routerCarrito.use(express.urlencoded({extended:true}))
 
-app.use(express.static('public'))
+
+
+
+let administrador;
 
 // ------------------------  CARRITO API -----------------------
 
@@ -209,7 +216,7 @@ routerCarrito.delete('/:id/:id_prod', (req,res) => {
 
 // ------------------------  PRODUCTOS API -----------------------
 
-routerProductos.get('/', (req,res) => {
+routerProductos.get('/',cors(), (req,res) => {
 
    let productosRead =  fs.readFileSync('productos.json')
    let productos = JSON.parse(productosRead)
@@ -220,23 +227,50 @@ routerProductos.get('/', (req,res) => {
 } )
 
 
-routerProductos.post('/', (req,res) => {
+routerProductos.get('/:id',cors(), (req,res) => {
 
-    let productosRead =  fs.readFileSync('productos.json')
-    let productos = JSON.parse(productosRead)
 
-    productos.push(req.body)
-    productos[productos.length-1].id = productos.length
+   let productosRead =  fs.readFileSync('productos.json')
+   let productos = JSON.parse(productosRead)
+  
+   const id = parseInt(req.params.id)
+   
+  let found = productos.find(item => item.id === id)
 
-    fs.writeFileSync('productos.json', JSON.stringify(productos))
+  if(!found){
 
-    res.json(productos)
+         
+         return res.json('No existe producto con ese id')
+  }
+
+    res.json(found)
 } )
 
 
-routerProductos.put('/:id', (req,res) => {
+routerProductos.post('/',cors(), (req,res) => {
+
+    if(req.body.nombre){
+        let productosRead =  fs.readFileSync('productos.json')
+        let productos = JSON.parse(productosRead)
+    
+        productos.push(req.body)
+        productos[productos.length-1].id = productos.length
+    
+        fs.writeFileSync('productos.json', JSON.stringify(productos))
+        console.log(req.body.nombre)
+        res.json(req.body)
+        return
+    }
+
+  console.log(req.body)
+    res.json('Informacion incompleta')
+
+} )
 
 
+routerProductos.put('/:id',cors(), (req,res) => {
+
+    console.log(req.body)
     let productosRead =  fs.readFileSync('productos.json')
     let productos = JSON.parse(productosRead)
    
@@ -256,9 +290,12 @@ routerProductos.put('/:id', (req,res) => {
         if(item.id === id){
 
 
-            item.title = req.body.title;
+            item.nombre = req.body.nombre;
             item.precio =  req.body.precio
-            item.thumbnail = req.body.thumbnail
+            item.descripcion = req.body.descripcion
+            item.foto = req.body.foto
+            item.precio = req.body.precio
+            item.stock = req.body.stock
   
             fs.writeFileSync('productos.json', JSON.stringify(productos)) 
             res.json( productos)
@@ -272,7 +309,7 @@ routerProductos.put('/:id', (req,res) => {
 
 } )
 
-routerProductos.delete('/:id', (req,res) => {
+routerProductos.delete('/:id',cors(), (req,res) => {
     const id = parseInt(req.params.id)
 
     let productosRead =  fs.readFileSync('productos.json')
@@ -296,14 +333,8 @@ routerProductos.delete('/:id', (req,res) => {
 } )
 
 
-
-
-
-
-const PORT = 8080;
-
-const server = app.listen(PORT, () => {
-    console.log(`servidor escuchando en el puerto ${server.address().port}`)
+const server = app.listen(process.env.PORT, () => {
+    console.log(`servidor escuchando en el puerto ${process.env.PORT}`)
 } )
 
 
