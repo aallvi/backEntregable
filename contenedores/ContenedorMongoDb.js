@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { productoModel } = require('../models/productos');
+const { logger } = require('../server');
 
 class ContenedorMongoDb {
    
@@ -7,15 +8,16 @@ class ContenedorMongoDb {
 //       this.coleccion = mongoose.model(nombreColeccion, esquema)
 //   }
 
-    async connect(){
-        try{
-            const url = 'mongodb+srv://alvi:12qwaszx@cafecluster.agk3g.mongodb.net/ecommerce?retryWrites=true&w=majority'
-            let rta = await mongoose.connect(url)
-            console.log('base de datos conectada MONGO')
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    // async connect(){
+    //     try{
+    //         const url = 'mongodb+srv://alvi:12qwaszx@cafecluster.agk3g.mongodb.net/ecommerce?retryWrites=true&w=majority'
+    //         let rta = await mongoose.connect(url)
+    //         console.log('base de datos conectada MONGO')
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+    // }
+ 
 
     async getAll(res){
         try {
@@ -25,6 +27,7 @@ class ContenedorMongoDb {
             res.json(productos)
             // return JSON.parse(productos)
         } catch (error) {
+            logger.error(error)
            
         }
     }
@@ -38,6 +41,8 @@ class ContenedorMongoDb {
             res.json(productos)
         } catch (error) {
             res.json(error)
+            logger.error(error)
+
         }
     }
 
@@ -48,11 +53,13 @@ class ContenedorMongoDb {
             const productoSaveModel = new productoModel(producto)
             let productoSave = await productoSaveModel.save()
             console.log(productoSave)
-           res.json('granado')
+            res.json('granado')
 
             
         } catch (error) {
             console.log(error)
+            logger.error(error)
+
         }
     
     }
@@ -66,7 +73,7 @@ class ContenedorMongoDb {
             let actualizado =  await productoModel.replaceOne({"_id" : req.params.id}, 
               {nombre : req.body.nombre,
               precio : req.body.precio,
-          descripcion : req.body.descripcion,
+              descripcion : req.body.descripcion,
               foto : req.body.foto,
               stock : req.body.stock,
               codigo : req.body.codigo})
@@ -75,6 +82,9 @@ class ContenedorMongoDb {
   
       } catch (error) {
           console.log(error)
+          logger.error(error)
+
+        //   logger.error('error al iniciar sesion')
       }
   
 
@@ -87,6 +97,8 @@ class ContenedorMongoDb {
             res.json('borrado')
         } catch (error) {
             res.json(error)
+            logger.error(error)
+
         }
     }
 
