@@ -185,9 +185,10 @@ const conector = envVars === 'FIREBASE' ? new ContenedorFirebase() : envVars ===
     
 // })
 
-app.get('/', (res,res) => {
-  res.send('jola')
-})
+// app.get('/', (res,res) => {
+  
+//   res.send('jola')
+// })
 
 
 const storage = multer.diskStorage({
