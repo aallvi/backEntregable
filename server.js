@@ -115,12 +115,7 @@ mongoose.connect(
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(
-    cors({
-      origin: "http://localhost:3001", // <-- location of the react app were connecting to
-      credentials: true,
-    })
-  );
+  app.use(cors());
   app.use(
     session({
       secret: "secretcode",
@@ -305,7 +300,8 @@ console.log(productos)
             to:'alvaro.leiva@websal.com',
             subject:`Nuevo pedido de ${req.body.nombre} `,
             text:`el usuario de email: ${req.body.email}
-              a comprado los siguientes productos ${productos}
+              a comprado los siguientes productos ${JSON.stringify(productos)}
+              
             `,
             
           }
@@ -324,7 +320,7 @@ console.log(productos)
           } )
 
           const accountSid = 'AC979e1c0006537ff58a80ad5713046c50'
-          const authToken = '0c5734bde106ad0338261662e55ff5bf'
+          const authToken = 'c830bf15df3f90b3943ae27ff588b8b3'
 
           const client = twilio(accountSid,authToken)
 
