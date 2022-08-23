@@ -1,6 +1,6 @@
 
 
-const {getProductos,getbyId,postProducto,updateProducto} = require('../negocio/productos.js')
+const {getProductos,getbyId,postProducto,updateProducto,deleteProductito} = require('../negocio/productos.js')
 
 
 async function getAll(req,res){
@@ -51,10 +51,23 @@ async function updateProduct(req,res){
 
 }
 
+async function deleteProduct(req,res) {
+
+   const id =  req.params.id
+
+   console.log(id)
+
+   const deleteprodu = await deleteProductito(id)
+
+   res.json(deleteprodu)
+
+
+}
 
 
 
 
 
-module.exports = {getAll, getById,postProduct,updateProduct}
+
+module.exports = {getAll, getById,postProduct,updateProduct,deleteProduct}
 

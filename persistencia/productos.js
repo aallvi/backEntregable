@@ -97,4 +97,18 @@ async function updateProductoDb(id,nombre,precio,descripcion,foto,stock,codigo){
   }
 }
 
-module.exports = {getProduct,getProductById,postProductoDb,updateProductoDb}
+
+async function deleteProductDb(id){
+
+    try {
+        await productoModel.deleteMany({_id:id})
+        return 'borrado'
+    } catch (error) {
+        res.json(error)
+        logger.error(error)
+
+    }
+
+}
+
+module.exports = {getProduct,getProductById,postProductoDb,updateProductoDb,deleteProductDb}

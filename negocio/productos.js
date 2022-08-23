@@ -1,4 +1,4 @@
-const { getProduct,getProductById,postProductoDb,updateProductoDb } = require("../persistencia/productos")
+const { getProduct,getProductById,postProductoDb,updateProductoDb,deleteProductDb } = require("../persistencia/productos")
 
 
 
@@ -31,5 +31,12 @@ async function updateProducto(id,nombre,precio,descripcion,foto,stock,codigo) {
     return response
 }
 
+async function deleteProductito(id){
+   
+    let response = await deleteProductDb(id)
 
-module.exports = {getProductos,getbyId,postProducto,updateProducto}
+    return response
+
+}
+
+module.exports = {getProductos,getbyId,postProducto,updateProducto,deleteProductito}

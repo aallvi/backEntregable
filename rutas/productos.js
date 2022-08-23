@@ -61,12 +61,8 @@ router.put('/:id', controlador.updateProduct )
 
 
 
-router.delete('/:id', async (req,res) => {
 
-    
-    conector.delete(req,res)
- 
 
-} )
+router.delete('/:id', controlador.deleteProduct )
 
 module.exports = router
