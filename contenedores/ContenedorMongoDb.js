@@ -36,7 +36,7 @@ class ContenedorMongoDb {
         try {
             let productos = await productoModel.find({_id: req.params.id})
             // console.log(productos)
-            console.log(req);
+            // console.log(req);
 
             res.json(productos)
         } catch (error) {
