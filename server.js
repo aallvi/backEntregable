@@ -83,7 +83,9 @@ if(cluster && clusterOn.isMaster){
 }else {
   console.log('fork')
 
-  const PORT = yargs.argv.puerto || process.env.PORT  || 8080
+  // const PORT = yargs.argv.puerto || process.env.PORT  || 8080   DESAROLLO
+
+  const PORT =  process.env.PORT  || 8080 // PRODUCCION
 
   app.get('/fork' , (req,res) => {
       res.send(`servidor express en ${PORT} - PID ${process.pid}  `)
