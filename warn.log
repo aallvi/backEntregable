@@ -99,3 +99,54 @@
     at processTicksAndRejections (internal/process/task_queues.js:95:5)
     at async updateProducto (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\negocio\productos.js:29:20)
     at async updateProduct (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\controlador\productos.js:48:23)
+[2022-08-27T13:19:13.011] [ERROR] default - error al iniciar sesion
+[2022-08-27T13:19:33.012] [ERROR] default - error al iniciar sesion
+[2022-08-29T18:44:22.738] [ERROR] default - error al iniciar sesion
+[2022-08-29T18:44:23.295] [ERROR] default - error al iniciar sesion
+[2022-08-29T18:53:49.989] [ERROR] default - error al iniciar sesion
+[2022-08-29T18:53:50.551] [ERROR] default - error al iniciar sesion
+[2022-08-29T19:02:30.378] [ERROR] default - error al iniciar sesion
+[2022-08-29T19:02:30.939] [ERROR] default - error al iniciar sesion
+[2022-08-29T20:30:43.753] [ERROR] default - CastError: Cast to ObjectId failed for value "tecnologia" (type string) at path "_id" for model "productos"
+    at model.Query.exec (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:4719:21)
+    at model.Query.Query.then (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:4818:15) {
+  messageFormat: undefined,
+  stringValue: '"tecnologia"',
+  kind: 'ObjectId',
+  value: 'tecnologia',
+  path: '_id',
+  reason: BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+      at new BSONTypeError (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\bson\lib\error.js:41:28)
+      at new ObjectId (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\bson\lib\objectid.js:67:23)
+      at castObjectId (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\cast\objectid.js:24:12)
+      at ObjectId.cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schema\objectid.js:245:12)
+      at ObjectId.SchemaType.applySetters (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1189:12)
+      at ObjectId.SchemaType._castForQuery (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1623:15)
+      at ObjectId.SchemaType.castForQuery (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1613:15)
+      at ObjectId.SchemaType.castForQueryWrapper (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1590:20)
+      at cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\cast.js:344:32)
+      at model.Query.Query.cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:5141:12),
+  valueType: 'string'
+}
+[2022-08-31T19:34:55.648] [ERROR] default - CastError: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "productos"
+    at model.Query.exec (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:4719:21)
+    at model.Query.Query.then (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:4818:15)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5) {
+  messageFormat: undefined,
+  stringValue: '"2"',
+  kind: 'ObjectId',
+  value: '2',
+  path: '_id',
+  reason: BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+      at new BSONTypeError (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\bson\lib\error.js:41:28)
+      at new ObjectId (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\bson\lib\objectid.js:67:23)
+      at castObjectId (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\cast\objectid.js:24:12)
+      at ObjectId.cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schema\objectid.js:245:12)
+      at ObjectId.SchemaType.applySetters (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1189:12)
+      at ObjectId.SchemaType._castForQuery (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1623:15)
+      at ObjectId.SchemaType.castForQuery (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1613:15)
+      at ObjectId.SchemaType.castForQueryWrapper (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\schematype.js:1590:20)
+      at cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\cast.js:344:32)
+      at model.Query.Query.cast (C:\Users\alvar\Desktop\curso-backend\desafioPrimerEntregable\Back\node_modules\mongoose\lib\query.js:5141:12),
+  valueType: 'string'
+}

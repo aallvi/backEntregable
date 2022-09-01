@@ -9,6 +9,7 @@ const ProductosSchema = new mongoose.Schema({
     foto:{type:String, require:true, max:100},
     precio:{type:Number, require:true, max:10000000000000},
     stock:{type:Number, require:true, max:100000000000000},
+    categoria:{type:String, required:true, max:1000000000 }
 
 })
 

@@ -17,6 +17,27 @@ const routerProductos = require('./rutas/productos.js')
 const routerFotos = require('./rutas/fotos.js')
 const routerAuth = require('./rutas/login.js')
 const routerCarrito = require('./rutas/carrito.js')
+const routerMensajes = require('./rutas/mensajes.js')
+const routerOrdenes = require('./rutas/ordenes.js')
+
+
+const http = require("http");
+const {Server} = require("socket.io")
+
+const server = http.createServer(app)
+
+const io = new Server(server,{
+    cors: {
+      origin:"http://localhost:3000",
+      methods:["GET", "POST"]
+    },
+})
+
+// const server = require('http').Server(app)
+// const io = require('socket.io')(server)
+
+// const socketio = require('socket.io')
+// const io = socketio(app)
 
 
 const log4js= require("log4js")
@@ -32,13 +53,15 @@ const numCPUs = require('os').cpus().length
 
 const yargs = require('yargs/yargs')(process.argv.slice(2))
 
+console.log('yargs',yargs.argv.hola)
+
 const {puerto,cluster} = yargs.
     alias({
         p:'puerto',
         c:'cluster'
     }).
     default({
-        puerto:8081,
+        puerto:8083,
         cluster:false
     }).argv
 
@@ -60,13 +83,13 @@ if(cluster && clusterOn.isMaster){
 }else {
   console.log('fork')
 
-  const PORT = process.env.PORT  || 8080
+  const PORT = yargs.argv.puerto || process.env.PORT  || 8080
 
   app.get('/fork' , (req,res) => {
       res.send(`servidor express en ${PORT} - PID ${process.pid}  `)
   } )
 
-  app.listen(PORT , err => {
+  server.listen(PORT , err => {
       if(!err) console.log(`servidor express en ${PORT} - PID ${process.pid}  `)
   })
 
@@ -143,29 +166,40 @@ app.use('/api/productos', routerProductos)
 app.use('/api/fotos', routerFotos)
 app.use('/api/carrito', routerCarrito)
 app.use('/api/auth', routerAuth)
+app.use('/api/mensajes', routerMensajes)
+app.use('/api/ordenes', routerOrdenes)
+
+
+
+io.on('connection', socket => {
+
+    socket.on("send_message", (data) =>{
+        console.log(data)
+        socket.broadcast.emit("receive_message",data )
+    } )
+
+})
 
 
 
 
 
 
+app.get('/home/:email', cors(),async (req,res) => {
 
 
-// app.get('/home/:email', cors(),async (req,res) => {
-
-
-//   try {
-//     let documento = await userModel.find({"email" : req.params.email})
-//     // console.log(documento)
+  try {
+    let documento = await userModel.find({"email" : req.params.email})
+    // console.log(documento)
   
-//     res.json(documento)
-//     // return JSON.parse(productos)
-// } catch (error) {
-//    console.log(error)
-//    logger.error('error al iniciar sesion')
-// }
+    res.json(documento)
+    // return JSON.parse(productos)
+} catch (error) {
+   console.log(error)
+   logger.error('error al iniciar sesion')
+}
     
-// })
+})
 
 
 // app.post('/finalizar', async (req,res) => {

@@ -24,7 +24,12 @@ log4js.configure({
   module.exports = logger = log4js.getLogger();
 
 
-async function getProduct(){
+
+class ProductosDaoDB {
+    
+    constructor (){}
+    
+async  getProduct(){
 
     try {
         let productos = await productoModel.find()
@@ -41,10 +46,25 @@ async function getProduct(){
 }
 
 
-async function getProductById(id){
+async  getProductById(id){
 
     try {
         let productos = await productoModel.find({_id: id})
+        // console.log(productos)
+        // console.log(req);
+
+        return productos
+    } catch (error) {
+        // res.json(error)
+        logger.error(error)
+
+    }
+}
+
+async  getProductByCategoria(categoria){
+
+    try {
+        let productos = await productoModel.find({categoria: categoria})
         // console.log(productos)
         // console.log(req);
 
@@ -56,7 +76,7 @@ async function getProductById(id){
     }
 }
 
-async function postProductoDb(producto){
+async  postProductoDb(producto){
 
     try {
         
@@ -74,7 +94,7 @@ async function postProductoDb(producto){
 }
 
 
-async function updateProductoDb(id,nombre,precio,descripcion,foto,stock,codigo){
+async  updateProductoDb(id,nombre,precio,descripcion,foto,stock,codigo){
 
     try {
        
@@ -98,7 +118,7 @@ async function updateProductoDb(id,nombre,precio,descripcion,foto,stock,codigo){
 }
 
 
-async function deleteProductDb(id){
+async  deleteProductDb(id){
 
     try {
         await productoModel.deleteMany({_id:id})
@@ -110,5 +130,9 @@ async function deleteProductDb(id){
     }
 
 }
+    
+}
 
-module.exports = {getProduct,getProductById,postProductoDb,updateProductoDb,deleteProductDb}
+
+
+module.exports = ProductosDaoDB

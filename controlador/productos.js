@@ -1,6 +1,6 @@
 
 
-const {getProductos,getbyId,postProducto,updateProducto,deleteProductito} = require('../negocio/productos.js')
+const {getProductos,getbyId,postProducto,updateProducto,deleteProductito, getbyCategorias} = require('../negocio/productos.js')
 
 
 async function getAll(req,res){
@@ -16,7 +16,28 @@ async function getById(req,res){
    let id = req.params.id
 
    const productos =  await getbyId(id)
+
+   if(!productos){
+      res.json('no existe este producto')
+      return
+   }
+
    res.json(productos)
+
+
+}
+async function getbyCategoria(req,res){
+   let categoria = req.params.categoria
+
+   const productosCategoria =  await getbyCategorias(categoria)
+
+   console.log('productosCategoria',productosCategoria)
+
+   if(productosCategoria.length === 0) {
+      res.json('no existe esa categoria')
+        return
+   }
+   res.json(productosCategoria)
 
 
 }
@@ -69,5 +90,5 @@ async function deleteProduct(req,res) {
 
 
 
-module.exports = {getAll, getById,postProduct,updateProduct,deleteProduct}
+module.exports = {getAll, getById,postProduct,updateProduct,deleteProduct,getbyCategoria}
 

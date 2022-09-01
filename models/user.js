@@ -7,7 +7,7 @@ const usersSchema = new mongoose.Schema({
     password:{type:String, require:true, max:10},
     nombre:{type:String, require:true, max:20},
     direccion:{type:String, require:true, max:40},
-    edad:{type:Number, require:true, max:100},
+    edad:{type:Number, require:true, max:100123123121212321313},
     telefono:{type:Number, require:true, max:100000000000},
     foto:{type:String, require:false, max:100000000000},
    
