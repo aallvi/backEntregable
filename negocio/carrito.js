@@ -12,7 +12,7 @@ const carritoDb = new CarritoDb()
 const yargs = require('yargs/yargs')(process.argv.slice(2))
 
 console.log('yargs',yargs.argv.email)
-console.log('yargs',yargs.argv.clave)
+// console.log('yargs',yargs.argv.clave)
 
 async function carroUsuario(carrito,email,nombre){
     
@@ -53,7 +53,7 @@ async function carroUsuario(carrito,email,nombre){
     
               let mailOptions = {
                 from:"Ecommerce <alvaro.leiva@websal.com>",
-                to:yargs.argv.email,
+                to:yargs.argv.email ? yargs.argv.email : 'aleiva97@gmail.com',
                 subject:`Nuevo pedido de ${nombre} `,
                 text:`el usuario de email: ${email}
                   a comprado los siguientes productos ${JSON.stringify(productos)}
