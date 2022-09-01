@@ -53,7 +53,7 @@ const numCPUs = require('os').cpus().length
 
 const yargs = require('yargs/yargs')(process.argv.slice(2))
 
-console.log('yargs',yargs.argv.hola)
+
 
 const {puerto,cluster} = yargs.
     alias({

@@ -11,7 +11,7 @@ const carritoDb = new CarritoDb()
 
 const yargs = require('yargs/yargs')(process.argv.slice(2))
 
-console.log('yargs',yargs.argv.email)
+// console.log('yargs',yargs.argv.email)
 // console.log('yargs',yargs.argv.clave)
 
 async function carroUsuario(carrito,email,nombre){
